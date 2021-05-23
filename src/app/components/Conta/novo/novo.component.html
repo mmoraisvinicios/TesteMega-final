@@ -1,0 +1,82 @@
+
+
+
+<div class="divCard" *ngIf="formulario">
+ 
+    <mat-card-header>
+        <mat-card-title>
+            <h3>Cadastro de Contas</h3>
+        </mat-card-title>
+        
+    </mat-card-header>
+        <form [formGroup]="formulario" (ngSubmit)="SalvarFormulario()">
+            <div class="cardErrors" *ngIf="erros.length > 0">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Dados inválidos! </mat-card-title>
+                    </mat-card-header>
+                    <mat-divider>     </mat-divider>
+                        <mat-card-content>
+                            <div class="divErros">
+                                <h4 class="textoErros" *ngFor="let erro of erros"> {{erro}} </h4>
+                            </div>
+                        </mat-card-content>
+               
+                </mat-card>
+            </div>
+     
+       
+            <mat-card-content>
+                <div> 
+                    <mat-form-field>
+                        <mat-label> Nome</mat-label>
+                        <input type="text" matInput formControlName="nome" placeholder="Digite seu nome"> 
+                        <mat-error *ngIf="formulario.controls.nome.invalid">{{getErrorMessage('nome')}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field>
+                        <mat-label> Documento</mat-label>
+                        <input type="text" matInput formControlName="documento" placeholder="Digite seu documento">
+                        <mat-error *ngIf="formulario.controls.documento.invalid">{{getErrorMessage('documento')}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field>
+                        <mat-label> Nº da Conta</mat-label>
+                        <input type="text" matInput formControlName="numeroConta" placeholder="Digite número da conta">
+                        <mat-error *ngIf="formulario.controls.numeroConta.invalid">{{getErrorMessage('numeroConta')}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field>
+                        <mat-label> Nº da Agência </mat-label>
+                        <input type="text" matInput formControlName="numeroAgencia" placeholder="Digite número da Agência">
+                        <mat-error *ngIf="formulario.controls.numeroAgencia.invalid">{{getErrorMessage('numeroAgencia')}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div> 
+                    <mat-form-field>
+                        <mat-label> Cod. Banco </mat-label>
+                        <mat-select formControlName="codigoBanco">
+                            <mat-option *ngFor="let b of bancos" [value]="b.compe">{{b.shortName}}</mat-option>
+                        </mat-select> 
+                        <mat-error *ngIf="formulario.controls.codigoBanco.invalid">{{getErrorMessage('codigoBanco')}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            
+            <mat-card-actions>
+                <div>
+                    <button type="submit" mat-stroked-button color="primary">Salvar</button>
+                    <button mat-stroked-button type="button" (click)="Voltar()">Voltar</button>
+                </div>
+            </mat-card-actions>
+        </form>
+</div>
